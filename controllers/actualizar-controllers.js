@@ -13,10 +13,15 @@ const obtenerInformacion = async () => {
   // usando await method
   try {
     const perfil = await clientService.detalleCliente(id);
-    nombre.value = perfil.nombre;
-    email.value = perfil.email;
+    if (perfil.name && perfil.email) {
+      nombre.value = perfil.name;
+      email.value = perfil.email;
+    } else {
+      throw new Error();
+    }
   } catch (error) {
     console.error();
+    window.location.href = "../screens/error.html";
   }
 };
 
