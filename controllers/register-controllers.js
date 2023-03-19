@@ -9,7 +9,7 @@ formulario.addEventListener("submit", async (event) => {
   try {
     const perfil = await clientService.crearCliente(nombre, email);
     window.location.href = "../screens/registro_completado.html";
-  } catch {
+  } catch (error) {
     console.error();
   }
 });
