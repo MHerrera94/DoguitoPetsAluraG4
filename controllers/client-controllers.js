@@ -28,7 +28,7 @@ const crearNuevaLinea = (nombre, email, id) => {
   btn.addEventListener("click", async () => {
     const id = btn.id;
     await clientService.eliminarCliente(id);
-    window.location.reload();
+    /*window.location.reload();*/
   });
   return linea;
 };
@@ -38,6 +38,7 @@ const table = document.querySelector("[data-table]");
 window.addEventListener("DOMContentLoaded", () => {
   /*const querySnapshot = await clientService.listaClientes();*/
   clientService.onListaClientes((querySnapshot) => {
+    table.innerHTML = "";
     querySnapshot.forEach((doc) => {
       const data = doc.data();
       const nuevaLinea = crearNuevaLinea(data.nombre, data.email, doc.id);
