@@ -13,9 +13,10 @@ const obtenerInformacion = async () => {
   // usando await method
   try {
     const perfil = await clientService.detalleCliente(id);
-    if (perfil.name && perfil.email) {
-      nombre.value = perfil.name;
-      email.value = perfil.email;
+    const data = perfil.data();
+    if (data.nombre && data.email) {
+      nombre.value = data.nombre;
+      email.value = data.email;
     } else {
       throw new Error();
     }
@@ -35,7 +36,7 @@ formulario.addEventListener("submit", async (event) => {
   const nombre = document.querySelector("[data-nombre]").value;
   const email = document.querySelector("[data-email]").value;
   try {
-    const perfil = await clientService.actualizarCliente(nombre, email, id);
+    await clientService.actualizarCliente(id, { nombre: nombre, email: email });
     window.location.href = "../screens/edicion_concluida.html";
   } catch (error) {
     console.error();
